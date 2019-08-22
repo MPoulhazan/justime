@@ -2,14 +2,18 @@
     <!-- Loading template -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
 
-    <mat-form-field class="example-full-width">
-        <input type="text" placeholder="Pick one" aria-label="Number" matInput [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
-        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-          <mat-option *ngFor="let option of stopsFiltered" [value]="option.libelle">
-            {{option.libelle}}
-          </mat-option>
-        </mat-autocomplete>
-      </mat-form-field>
+    <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm">
+        <mat-form-field>
+            <input type="text" placeholder="Quelle arrêt ?" aria-label="Number" matInput [matAutocomplete]="auto"
+                (input)="onInputChange($event.target.value)">
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of stopsFiltered" [value]="option.codeLieu">
+                    {{option.libelle}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+        <button type="submit" mat-button>submit</button>
+    </form>
 
 
 </ion-content>

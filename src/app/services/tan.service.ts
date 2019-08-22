@@ -19,7 +19,7 @@ export class TanService extends ParentServices {
     }
 
     /**
-     * Get list hours
+     * Get list stops
      */
     getTanStops(): Observable<Stop[]> {
         const url = BASE_URL + 'arrets.json';
@@ -43,6 +43,32 @@ export class TanService extends ParentServices {
                     (error) => {
                         LOGGER.error(`Error ${error.status} during get stops ${error.message}. Server cause : ${error.error}`);
                         obs.error(`Error ${error.status} during get stops`);
+                    });
+        });
+    }
+
+    /**
+     * Get list hours
+     */
+    getHoursAtStop(stopId: string): Observable<any[]> {
+        const url = BASE_URL + 'tempsattente.json/' + stopId;
+
+        const httpHeaders = new HttpHeaders()
+            .append('Content-Type', 'application/json');
+
+        return new Observable(obs => {
+            this.http.get<any[]>(url, { headers: httpHeaders, responseType: 'json' })
+                .subscribe(
+                    (response) => {
+                        if (response) {
+                            obs.next(response);
+                        } else {
+                            obs.error('No response when get hours list');
+                        }
+                    },
+                    (error) => {
+                        LOGGER.error(`Error ${error.status} during get hours ${error.message}. Server cause : ${error.error}`);
+                        obs.error(`Error ${error.status} during get hours`);
                     });
         });
     }

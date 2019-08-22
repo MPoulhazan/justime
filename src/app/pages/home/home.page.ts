@@ -20,7 +20,7 @@ export class HomePage implements OnInit {
 
     public stops: Stop[] = [];
     public stopsFiltered: Stop[] = [];
-    public stopFormControl = new FormControl();
+    public stopsFormGroup = new FormControl();
 
     constructor(
         private router: Router,
@@ -38,5 +38,10 @@ export class HomePage implements OnInit {
 
     onInputChange(value) {
         this.stopsFiltered = this.stops.filter(stop => stop.libelle.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0);
+    }
+
+    submitStops() {
+
+        console.log('Submùir', this.stopsFormGroup);
     }
 }
