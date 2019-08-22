@@ -1,0 +1,24 @@
+ion-tabs {
+
+    padding-top: 60px;
+
+    .tabs-icons {
+        font-size: 35px;
+    
+        &.ajust-align-mat-icons {
+            margin-top: 2px;
+        }
+    }
+    
+    .swipe-area {
+        height:100%;
+        width:100%;
+    }
+    
+    .tab-selected {
+        .tabs-icons {
+            border-top: #3780ff solid 2px;
+            padding: 10px;
+        }
+    }
+}

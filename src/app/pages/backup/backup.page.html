@@ -1,0 +1,15 @@
+<ion-content>
+    <!-- Loading template -->
+    <app-loading *ngIf="isLoading" [isCard]="true" [numberOfRows]="1" [numberOfCols]="1"></app-loading>
+
+    <!-- Loaded datas -->
+    <ion-grid *ngIf="nbBackupRealTime" class="animated fadeIn">
+        <ion-row>
+            <ion-col size="12">
+                <app-card-counter [title]="'backup.nb.real.time' | translate" [value]="nbBackupRealTime !== -1 ? nbBackupRealTime : '-'"
+                    [color]="'#BD2974'">
+                </app-card-counter>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

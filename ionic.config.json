@@ -1,0 +1,7 @@
+{
+  "name": "justime-nantes-app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

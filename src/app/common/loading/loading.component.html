@@ -1,0 +1,9 @@
+<!-- Cards style template -->
+<span *ngIf="isCard">
+    <ion-row *ngFor="let element of numberOfRowsTab">
+        <ion-col size="6" *ngFor="let element of numberOfColsTab">
+            <ion-card class="animated-background loading-card">
+            </ion-card>
+        </ion-col>
+    </ion-row>
+</span>

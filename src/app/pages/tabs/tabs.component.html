@@ -1,0 +1,12 @@
+<app-header [showClient]="true"></app-header>
+<ion-tabs appSwipetab (ionTabsDidChange)="ionTabsDidChange($event)" (tabChange)="onTabChange($event)" #myTabs>
+    <ion-tab-bar slot="bottom">
+        <ion-tab-button tab="home">
+            <ion-icon name="home" class="tabs-icons"></ion-icon>
+        </ion-tab-button>
+
+        <ion-tab-button tab="backup">
+            <i class="material-icons tabs-icons ajust-align-mat-icons">star</i>
+        </ion-tab-button>
+    </ion-tab-bar>
+</ion-tabs>
