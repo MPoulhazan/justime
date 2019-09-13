@@ -18,12 +18,12 @@ const routes: Routes = [
         ]
       },
       {
-        path: 'backup',
+        path: 'favorite',
         children: [
           {
             path: '',
             loadChildren: () =>
-              import('../backup/backup.module').then(m => m.BackupModule)
+              import('../favorite/favorite.module').then(m => m.FavoriteModule)
           }
         ]
       },

@@ -3,14 +3,14 @@ import { Logger } from 'src/app/services/logger.service';
 import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 
-const LOGGER = new Logger('BackupPage');
+const LOGGER = new Logger('FavoritePage');
 
 @Component({
-    selector: 'app-backup',
-    templateUrl: './backup.page.html',
-    styleUrls: ['./backup.page.scss'],
+    selector: 'app-favorite',
+    templateUrl: './favorite.page.html',
+    styleUrls: ['./favorite.page.scss'],
 })
-export class BackupPage implements OnInit {
+export class FavoritePage implements OnInit {
 
     constructor(
         private dataService: DataService,

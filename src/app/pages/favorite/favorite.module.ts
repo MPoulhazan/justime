@@ -1,7 +1,7 @@
 import { CardCounterModule } from 'src/app/common/card/counter/card-counter.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackupPage } from './backup.page';
+import { FavoritePage } from './favorite.page';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CardCounterComponent } from 'src/app/common/card/counter/card-counter.component';
@@ -12,15 +12,15 @@ import { LoadingModule } from 'src/app/common/loading/loading.module';
 
 @NgModule({
   declarations: [
-      BackupPage,
+    FavoritePage,
     ],
   imports: [
     CommonModule,
     IonicModule,
-    RouterModule.forChild([{ path: '', component: BackupPage }]),
+    RouterModule.forChild([{ path: '', component: FavoritePage }]),
     TranslateModule,
     CardCounterModule,
     LoadingModule
   ]
 })
-export class BackupModule { }
+export class FavoriteModule { }
