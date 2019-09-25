@@ -6,7 +6,7 @@ import { DataService } from 'src/app/services/data.service';
 import { Router } from '@angular/router';
 import { TanService } from 'src/app/services/tan.service';
 import { Stop } from 'src/app/models/stop.model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 
 const LOGGER = new Logger('HomePage');
@@ -20,15 +20,21 @@ export class HomePage implements OnInit {
 
     public stops: Stop[] = [];
     public stopsFiltered: Stop[] = [];
-    public stopsFormGroup = new FormControl();
+    public stopsFormGroup: FormGroup;
 
     constructor(
         private router: Router,
         private tanService: TanService,
-        public navController: NavController
+        public navController: NavController,
+        private formBuilder: FormBuilder
     ) { }
 
     ngOnInit() {
+
+        // Init Form
+        this.stopsFormGroup = this.formBuilder.group({
+            stop: ['', Validators.required]
+        });
 
         this.tanService.getTanStops().subscribe(res => {
             this.stops = res;
@@ -41,7 +47,14 @@ export class HomePage implements OnInit {
     }
 
     submitStops() {
+        const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
+        // const nextBusList = 
+        this.tanService.getHoursAtStop(codeLieu).subscribe(hours => {
+            console.log(hours);
+            hours.forEach(element => {
+                console.log(element);
 
-        console.log('Submùir', this.stopsFormGroup);
+            });
+        });
     }
 }

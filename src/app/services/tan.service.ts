@@ -5,6 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, observable, throwError } from 'rxjs';
 import { ParentServices } from './parent.service';
 import { Stop } from '../models/stop.model';
+import { BusPayload, Bus } from '../models/bus.model';
 
 const LOGGER = new Logger('TanService');
 const BASE_URL: string = environment.baseUrlTan;
@@ -26,9 +27,9 @@ export class TanService extends ParentServices {
 
         const httpHeaders = new HttpHeaders()
             .append('Content-Type', 'application/json');
-            // .append('Access-Control-Allow-Origin', '*')
-            // .append('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token')
-            // .append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
+        // .append('Access-Control-Allow-Origin', '*')
+        // .append('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token')
+        // .append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
 
         return new Observable(obs => {
             this.http.get<Stop[]>(url, { headers: httpHeaders, responseType: 'json' })
@@ -50,18 +51,18 @@ export class TanService extends ParentServices {
     /**
      * Get list hours
      */
-    getHoursAtStop(stopId: string): Observable<any[]> {
+    getHoursAtStop(stopId: string): Observable<Bus[]> {
         const url = BASE_URL + 'tempsattente.json/' + stopId;
 
         const httpHeaders = new HttpHeaders()
             .append('Content-Type', 'application/json');
 
         return new Observable(obs => {
-            this.http.get<any[]>(url, { headers: httpHeaders, responseType: 'json' })
+            this.http.get<BusPayload[]>(url, { headers: httpHeaders, responseType: 'json' })
                 .subscribe(
                     (response) => {
                         if (response) {
-                            obs.next(response);
+                            obs.next(response.map(busPayload => this.mapPayloadToBus(busPayload)));
                         } else {
                             obs.error('No response when get hours list');
                         }
@@ -71,5 +72,18 @@ export class TanService extends ParentServices {
                         obs.error(`Error ${error.status} during get hours`);
                     });
         });
+    }
+
+    private mapPayloadToBus(busPayload: BusPayload): Bus {
+        return new Bus(
+            busPayload.arret.codeArret,
+            busPayload.dernierDepart,
+            busPayload.ligne.numLigne,
+            busPayload.ligne.typeLigne,
+            busPayload.sens,
+            busPayload.temps,
+            busPayload.tempsReel,
+            busPayload.terminus
+        );
     }
 }
