@@ -4,8 +4,8 @@
 
     <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm">
         <mat-form-field>
-            <input type="text" formControlName="stop" placeholder="Quelle arrêt ?" aria-label="Number" matInput [matAutocomplete]="auto"
-                (input)="onInputChange($event.target.value)">
+            <input type="text" formControlName="stop" placeholder="Quelle arrêt ?" aria-label="Number" matInput
+                [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
                 <mat-option *ngFor="let option of stopsFiltered" [value]="option.libelle">
                     {{option.libelle}}
@@ -14,6 +14,22 @@
         </mat-form-field>
         <button type="submit" mat-button>submit</button>
     </form>
+
+    <ion-grid>
+        <ion-row class="ion-align-items-center">
+            <ion-col size="6">
+                <ion-card *ngFor="let itBusCard of finalBusCardAtStop">
+                    <ion-card-header>
+                        <ion-card-subtitle>{{itBusCard.bus.sens}}</ion-card-subtitle>
+                        <ion-card-title>{{itBusCard.bus.numLigne}}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                            {{itBusCard.nextHours}}
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
 
 </ion-content>

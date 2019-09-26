@@ -8,6 +8,7 @@ import { TanService } from 'src/app/services/tan.service';
 import { Stop } from 'src/app/models/stop.model';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
+import { BusCard } from 'src/app/models/bus.model';
 
 const LOGGER = new Logger('HomePage');
 
@@ -21,6 +22,7 @@ export class HomePage implements OnInit {
     public stops: Stop[] = [];
     public stopsFiltered: Stop[] = [];
     public stopsFormGroup: FormGroup;
+    public finalBusCardAtStop: BusCard[] = [];
 
     constructor(
         private router: Router,
@@ -48,12 +50,22 @@ export class HomePage implements OnInit {
 
     submitStops() {
         const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
-        // const nextBusList = 
-        this.tanService.getHoursAtStop(codeLieu).subscribe(hours => {
-            console.log(hours);
-            hours.forEach(element => {
-                console.log(element);
 
+        // Get each bus for this stop
+        this.tanService.getHoursAtStop(codeLieu).subscribe(allBusAtStop => {
+
+            allBusAtStop.forEach(bus => {
+                const busCardAtStop = this.finalBusCardAtStop.find((busCard: BusCard) => {
+                    return busCard.bus.numLigne === bus.numLigne && busCard.bus.sens === bus.sens;
+                });
+                if (!busCardAtStop) {
+                    this.finalBusCardAtStop.push(new BusCard(bus, [bus.temps]));
+                } else {
+                    if (!busCardAtStop.nextHours) {
+                        busCardAtStop.nextHours = [];
+                    }
+                    busCardAtStop.nextHours.push(bus.temps);
+                }
             });
         });
     }

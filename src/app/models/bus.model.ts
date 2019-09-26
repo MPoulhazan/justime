@@ -41,3 +41,16 @@ export interface BusPayload {
     tempsReel: string;
     terminus: string;
 }
+
+export class BusCard {
+    bus: Bus;
+    nextHours: string[];
+
+    constructor(
+        bus: Bus,
+        nextHours: string[]
+    ) {
+        this.bus = bus;
+        this.nextHours = nextHours;
+    }
+}
