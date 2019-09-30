@@ -64,6 +64,7 @@ export class HomePage implements OnInit {
                     if (!busCardAtStop.nextHours) {
                         busCardAtStop.nextHours = [];
                     }
+                    if(busCardAtStop.nextHours)
                     busCardAtStop.nextHours.push(bus.temps);
                 }
             });

@@ -1,8 +1,8 @@
-<ion-content>
+<ion-content class="home-container">
     <!-- Loading template -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
 
-    <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm">
+    <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm" class="form-container">
         <mat-form-field>
             <input type="text" formControlName="stop" placeholder="Quelle arrêt ?" aria-label="Number" matInput
                 [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
@@ -12,19 +12,24 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
-        <button type="submit" mat-button>submit</button>
+        <ion-button  type="submit">
+            <ion-icon slot="start" name="search"></ion-icon>
+        </ion-button>
     </form>
 
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col size="12">
-                <ion-card *ngFor="let itBusCard of finalBusCardAtStop">
-                    <ion-card-header>
-                        <ion-card-subtitle>{{itBusCard.bus.sens}}</ion-card-subtitle>
+                <ion-card *ngFor="let itBusCard of finalBusCardAtStop" class="bus-card">
+                    <ion-card-header class="line-container">
                         <ion-card-title>{{itBusCard.bus.numLigne}}</ion-card-title>
+                        <ion-card-subtitle>{{itBusCard.bus.terminus}}</ion-card-subtitle>
                     </ion-card-header>
                     <ion-card-content>
-                            {{itBusCard.nextHours}}
+                        <span *ngIf="itBusCard.nextHours && itBusCard.nextHours.length > 0"><h1>{{ itBusCard.nextHours[0] }}</h1></span>
+                        <p *ngFor="let hour of itBusCard.nextHours; let i = index" class="next-hours">
+                            <i *ngIf="i > 0">{{hour}}<span *ngIf="i < itBusCard.nextHours.length - 1">, </span> </i>
+                        </p>
                     </ion-card-content>
                 </ion-card>
             </ion-col>

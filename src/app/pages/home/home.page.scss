@@ -2,3 +2,28 @@
 ion-content {
     --background: #ffffff;
 }
+
+.home-container {
+
+    .form-container {
+
+        display: inline-flex;
+        width: 100%;
+
+        > * {
+            flex: auto;
+            margin: 0 10px;
+        }
+    }
+
+    .line-container {
+        width: 30%;
+        padding: 15px;
+    }
+    .bus-card {
+        display: flex;
+    }
+    .next-hours {
+        display: inline;
+    }
+}

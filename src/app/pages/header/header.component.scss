@@ -1,18 +1,11 @@
 @import "../../../theme/colors";
 
-.logo {
-    position: absolute;
-    left: 5px;
-    top: 5px;
-    width: 37px;
-    height: 37px;
-  }
   .title {
     color: $color-blue;
-    font-size: xx-large;
+    font-size: 1.3em;;
     font-weight: bold;
     font-family: arial, sans-serif;
-    margin: auto 0 auto 10px;
+    margin: 15px 0 auto 10px;
   }
   
   .center-text {
