@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  baseUrlTan: 'http://open_preprod.tan.fr/ewp/',
+  baseUrlTan: 'https://proxy-cors-mpo.herokuapp.com/http://open_preprod.tan.fr/ewp/',
 };
