@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  baseUrlTan: 'https://newport.services.thalesgroup.com',
+    production: true,
+    baseUrlTan: 'http://open_preprod.tan.fr/ewp/',
 };

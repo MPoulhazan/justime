@@ -59,87 +59,15 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "optimization": true,
+              "optimization": false,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            },
-            "pprod": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.pprod.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
+              "extractCss": false,
               "namedChunks": false,
               "aot": false,
-              "extractLicenses": true,
+              "extractLicenses": false,
               "vendorChunk": false,
               "buildOptimizer": false,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            },
-            "recette": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.recette.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                }
-              ]
-            },
-            "integ": {
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.integ.ts"
-                }
-              ],
-              "optimization": true,
-              "outputHashing": "all",
-              "sourceMap": false,
-              "extractCss": true,
-              "namedChunks": false,
-              "aot": true,
-              "extractLicenses": true,
-              "vendorChunk": false,
-              "buildOptimizer": true,
               "budgets": [
                 {
                   "type": "initial",
@@ -161,15 +89,6 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
-            },
-            "pprod": {
-              "browserTarget": "app:build:pprod"
-            },
-            "recette": {
-              "browserTarget": "app:build:recette"
-            },
-            "integ": {
-              "browserTarget": "app:build:integ"
             },
             "ci": {
               "progress": false
@@ -233,15 +152,6 @@
           "configurations": {
             "production": {
               "browserTarget": "app:build:production"
-            },
-             "pprod": {
-              "browserTarget": "app:build:pprod"
-            },
-            "recette": {
-              "browserTarget": "app:build:recette"
-            },
-            "integ": {
-              "browserTarget": "app:build:integ"
             }
           }
         },
@@ -255,18 +165,6 @@
             "production": {
               "cordovaBuildTarget": "app:ionic-cordova-build:production",
               "devServerTarget": "app:serve:production"
-            },
-            "pprod": {
-              "cordovaBuildTarget": "app:ionic-cordova-build:pprod",
-              "devServerTarget": "app:serve:pprod"
-            },
-            "recette": {
-              "cordovaBuildTarget": "app:ionic-cordova-build:recette",
-              "devServerTarget": "app:serve:recette"
-            },
-            "integ": {
-              "cordovaBuildTarget": "app:ionic-cordova-build:integ",
-              "devServerTarget": "app:serve:integ"
             }
           }
         }
@@ -285,15 +183,6 @@
           "configurations": {
             "production": {
               "devServerTarget": "app:serve:production"
-            },
-            "pprod": {
-              "devServerTarget": "app:serve:pprod"
-            },
-            "recette": {
-              "devServerTarget": "app:serve:recette"
-            },
-            "integ": {
-              "devServerTarget": "app:serve:integ"
             },
             "ci": {
               "devServerTarget": "app:serve:ci"

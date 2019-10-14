@@ -26,7 +26,7 @@ export class TanService extends ParentServices {
         const url = BASE_URL + 'arrets.json';
 
         const httpHeaders = new HttpHeaders()
-            .append('Content-Type', 'application/json');
+            .append('Content-Type', 'application/json');    // TODO : Comment passer le CORS ?
         // .append('Access-Control-Allow-Origin', '*')
         // .append('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token')
         // .append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
