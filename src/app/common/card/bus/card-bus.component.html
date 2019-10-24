@@ -1,0 +1,14 @@
+<ion-card class="bus-card animated bounceInUp">
+    <ion-card-header class="line-container">
+        <ion-card-title>{{busCard.bus.numLigne}}</ion-card-title>
+        <ion-card-subtitle>{{busCard.bus.terminus}}</ion-card-subtitle>
+        <i class="material-icons add-favorite">star</i>
+    </ion-card-header>
+    <ion-card-content>
+        <span *ngIf="busCard.nextHours && busCard.nextHours.length > 0" class="next-hour">
+            <h1>{{ busCard.nextHours[0] }}</h1></span>
+        <p *ngFor="let hour of busCard.nextHours; let i = index" class="next-hours">
+            <i *ngIf="i > 0"><span *ngIf="i === 1">Suivants : </span>{{hour}}<span *ngIf="i < busCard.nextHours.length - 1">, </span> </i>
+        </p>
+    </ion-card-content>
+</ion-card>

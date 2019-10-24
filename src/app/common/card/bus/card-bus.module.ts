@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CardCounterComponent } from './card-counter.component';
+import { CardBusComponent } from './card-bus.component';
 import { LoadingModule } from '../../loading/loading.module';
 import { IonicModule } from '@ionic/angular';
 
 @NgModule({
   declarations: [
-      CardCounterComponent
+      CardBusComponent
   ],
   imports: [
     CommonModule,
     IonicModule
   ],
-  exports: [CardCounterComponent]
+  exports: [CardBusComponent]
 })
-export class CardCounterModule { }
+export class CardBusModule { }

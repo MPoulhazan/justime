@@ -20,18 +20,7 @@
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col size="12">
-                <ion-card *ngFor="let itBusCard of finalBusCardAtStop" class="bus-card">
-                    <ion-card-header class="line-container">
-                        <ion-card-title>{{itBusCard.bus.numLigne}}</ion-card-title>
-                        <ion-card-subtitle>{{itBusCard.bus.terminus}}</ion-card-subtitle>
-                    </ion-card-header>
-                    <ion-card-content>
-                        <span *ngIf="itBusCard.nextHours && itBusCard.nextHours.length > 0"><h1>{{ itBusCard.nextHours[0] }}</h1></span>
-                        <p *ngFor="let hour of itBusCard.nextHours; let i = index" class="next-hours">
-                            <i *ngIf="i > 0">{{hour}}<span *ngIf="i < itBusCard.nextHours.length - 1">, </span> </i>
-                        </p>
-                    </ion-card-content>
-                </ion-card>
+                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop" [busCard]="itBusCard"></app-card-bus>
             </ion-col>
         </ion-row>
     </ion-grid>

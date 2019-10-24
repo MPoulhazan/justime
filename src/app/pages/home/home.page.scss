@@ -1,6 +1,7 @@
 
 ion-content {
-    --background: #ffffff;
+    --background: url("../../../assets/image/bgbus.jpeg") no-repeat center fixed;
+    --background-size: cover 100%;
 }
 
 .home-container {
@@ -19,11 +20,5 @@ ion-content {
     .line-container {
         width: 30%;
         padding: 15px;
-    }
-    .bus-card {
-        display: flex;
-    }
-    .next-hours {
-        display: inline;
     }
 }

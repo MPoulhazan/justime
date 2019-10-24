@@ -8,10 +8,10 @@ import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { IonicModule } from '@ionic/angular';
 import { LoadingModule } from 'src/app/common/loading/loading.module';
-import { CardCounterModule } from 'src/app/common/card/counter/card-counter.module';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
+import { CardBusModule } from 'src/app/common/card/bus/card-bus.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule,
     TranslateModule,
     RouterModule.forChild([{ path: '', component: HomePage }]),
-    CardCounterModule,
+    CardBusModule,
     LoadingModule,
     MaterialModule,
     MatAutocompleteModule,

@@ -49,6 +49,7 @@ export class HomePage implements OnInit {
     }
 
     submitStops() {
+        this.initDatas();
         const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
 
         // Get each bus for this stop
@@ -70,5 +71,9 @@ export class HomePage implements OnInit {
                 }
             });
         });
+    }
+
+    initDatas() {
+        this.finalBusCardAtStop = [];
     }
 }

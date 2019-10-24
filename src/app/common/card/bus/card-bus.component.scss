@@ -1,0 +1,17 @@
+.bus-card {
+    --background: #ffffff;
+
+    .add-favorite {
+        position: absolute;
+        right: 6px;
+        top: 10px;
+    }
+
+    .next-hour {
+        text-align: center;
+        font-weight: bold;
+    }
+    .next-hours {
+        display: inline;
+    }
+}
