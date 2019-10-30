@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { BusCard } from 'src/app/models/bus.model';
+import { StorageService } from 'src/app/services/storage.service';
 
 @Component({
   selector: 'app-card-bus',
@@ -11,12 +12,15 @@ export class CardBusComponent implements OnInit {
     @Input()
     busCard: BusCard;
 
-  constructor() { }
+  constructor(
+      private storageService: StorageService
+  ) { }
 
   ngOnInit() {}
 
   addToFavorites(idligne, idStop) {
     console.log(idligne, idStop);
+    this.storageService.saveBookmarksInStorage(idligne, idStop);
   }
 
 }

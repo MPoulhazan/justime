@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { Logger } from './logger.service';
+import { Storage } from '@ionic/storage';
 
 const logger = new Logger('StorageService');
 const BOOKMARK_STORAGE_KEY = 'bookmark';
@@ -26,7 +28,7 @@ export class StorageService {
         private storage: Storage
     ) { }
 
-    private saveBookmarksInStorage(lineId: string, stopId): void {
+    public saveBookmarksInStorage(lineId: string, stopId): void {
         const busParams = new BusParams(lineId, stopId);
 
         this.storage.set(BOOKMARK_STORAGE_KEY, busParams)
@@ -36,19 +38,10 @@ export class StorageService {
             });
     }
 
-    private addBookmarksInStorage(lineId: string, stopId): void {
-        const busParams = new BusParams(lineId, stopId);
 
-        this.storage.append(BOOKMARK_STORAGE_KEY, busParams)
-            .catch(() => logger.error('Add bookmarks failed'))
-            .finally(() => {
-                logger.debug('Bookmark bus added');
-            });
-    }
+    public getBookmarksInStorage(): Promise<string> {
 
-    private getBookmarksInStorage(): void {
-
-        this.storage.get()
+        return this.storage.get(BOOKMARK_STORAGE_KEY)
             .catch(() => logger.error('Get bookmarks failed'))
             .finally(() => {
                 logger.debug('get bookmark bus success');
