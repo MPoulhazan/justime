@@ -15,4 +15,8 @@ export class CardBusComponent implements OnInit {
 
   ngOnInit() {}
 
+  addToFavorites(idligne, idStop) {
+    console.log(idligne, idStop);
+  }
+
 }
