@@ -17,7 +17,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { DataService } from './services/data.service';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { StorageService } from './services/storage.service';
+import { BookmarkService } from './services/bookmark.service';
 
 @NgModule({
     declarations: [
@@ -48,7 +48,7 @@ import { StorageService } from './services/storage.service';
         {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
         TanService,
         DataService,
-        StorageService
+        BookmarkService
     ],
     bootstrap: [AppComponent],
 })

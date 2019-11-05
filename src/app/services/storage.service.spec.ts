@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StorageService } from './storage.service';
+import { BookmarkService } from './bookmark.service';
 
-describe('StorageService', () => {
+describe('BookmarkService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: StorageService = TestBed.get(StorageService);
+    const service: BookmarkService = TestBed.get(BookmarkService);
     expect(service).toBeTruthy();
   });
 });

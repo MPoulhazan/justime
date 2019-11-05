@@ -5,6 +5,10 @@
         position: absolute;
         right: 6px;
         top: 10px;
+
+        &.green {
+            color: #09ff00;
+        }
     }
 
     .next-hour {

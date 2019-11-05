@@ -9,6 +9,8 @@ import { Stop } from 'src/app/models/stop.model';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { BusCard } from 'src/app/models/bus.model';
+import { BookmarkService } from 'src/app/services/bookmark.service';
+import { Bookmark } from 'src/app/models/bookmark.model';
 
 const LOGGER = new Logger('HomePage');
 
@@ -23,10 +25,12 @@ export class HomePage implements OnInit {
     public stopsFiltered: Stop[] = [];
     public stopsFormGroup: FormGroup;
     public finalBusCardAtStop: BusCard[] = [];
+    public bookmarks: Bookmark[];
 
     constructor(
         private router: Router,
         private tanService: TanService,
+        private bookmarkService: BookmarkService,
         public navController: NavController,
         private formBuilder: FormBuilder
     ) { }
@@ -42,6 +46,8 @@ export class HomePage implements OnInit {
             this.stops = res;
             this.stopsFiltered = res;
         });
+
+        this.getAllBookmarks();
     }
 
     onInputChange(value) {
@@ -75,5 +81,10 @@ export class HomePage implements OnInit {
 
     initDatas() {
         this.finalBusCardAtStop = [];
+    }
+
+    getAllBookmarks() {
+        // Call service at start to initialize bookmark list
+        this.bookmarkService.getBookmarksInStorage();
     }
 }
