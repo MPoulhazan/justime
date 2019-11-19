@@ -23,8 +23,8 @@ export class CardBusComponent implements OnInit {
         this.isBookmarked = this.isInBookmark();
     }
 
-    addToFavorites(idligne, idStop) {
-        const bookmark = new Bookmark(idligne, idStop);
+    addToFavorites(idligne, idStop, sens) {
+        const bookmark = new Bookmark(idligne, idStop, sens);
         if (this.isBookmarked) {
             this.bookmarkService.removeBookmarkInStorage(bookmark);
         } else {
@@ -34,7 +34,7 @@ export class CardBusComponent implements OnInit {
     }
 
     isInBookmark(): boolean {
-        const refBookmark = new Bookmark(this.busCard.bus.numLigne, this.busCard.bus.arret);
+        const refBookmark = new Bookmark(this.busCard.bus.numLigne, this.busCard.bus.arret, this.busCard.bus.sens);
         return this.bookmarkService.bookmarks.filter(bookmark =>
             bookmark.lineId === refBookmark.lineId && bookmark.stopId === refBookmark.stopId).length > 0;
     }

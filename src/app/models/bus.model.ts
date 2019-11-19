@@ -54,3 +54,14 @@ export class BusCard {
         this.nextHours = nextHours;
     }
 }
+
+export interface BusDetailsPayload {
+    arret: { codeArret: string, libelle: string, accessible: boolean };
+    codeCouleur: string;
+    infotrafic: true;
+    horaires: [{ heure: string, passage: string[] }];
+    ligne: {directionSens1: string, directionSens2: string};
+    notes: [{code: string, libelle: string}];
+    plageDeService: string;
+    prochainsHoraires: [{ heure: string, passage: string[] }];
+}

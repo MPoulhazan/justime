@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 import { LoadingModule } from 'src/app/common/loading/loading.module';
+import { CardBusModule } from 'src/app/common/card/bus/card-bus.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { LoadingModule } from 'src/app/common/loading/loading.module';
     IonicModule,
     RouterModule.forChild([{ path: '', component: FavoritePage }]),
     TranslateModule,
-    LoadingModule
+    LoadingModule,
+    CardBusModule
   ]
 })
 export class FavoriteModule { }

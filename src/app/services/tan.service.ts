@@ -5,7 +5,7 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Observable, observable, throwError } from 'rxjs';
 import { ParentServices } from './parent.service';
 import { Stop } from '../models/stop.model';
-import { BusPayload, Bus } from '../models/bus.model';
+import { BusPayload, Bus, BusDetailsPayload } from '../models/bus.model';
 
 const LOGGER = new Logger('TanService');
 const BASE_URL: string = environment.baseUrlTan;
@@ -79,20 +79,18 @@ export class TanService extends ParentServices {
     /**
      * Get list hours
      */
-    getHoursAtStopWithLineId(stopId: string, lineId: string, sensId?: string): Observable<Bus[]> {
-        const sensIdStr = sensId ? '/'.concat(sensId) : '';
-        const url = BASE_URL + HORAIRE_ARRET_API + '/' + stopId + '/' + lineId + sensIdStr;
-        console.log(url);
+    getHoursAtStopWithLineIdAndSens(stopId: string, lineId: string, sens: number): Observable<Bus> {
+        const url = BASE_URL + HORAIRE_ARRET_API + '/' + stopId + '/' + lineId + '/' + sens;
 
         const httpHeaders = new HttpHeaders()
             .append('Content-Type', 'application/json');
 
         return new Observable(obs => {
-            this.http.get<BusPayload[]>(url, { headers: httpHeaders, responseType: 'json' })
+            this.http.get<BusDetailsPayload>(url, { headers: httpHeaders, responseType: 'json' })
                 .subscribe(
                     (response) => {
                         if (response) {
-                            obs.next(response.map(busPayload => this.mapPayloadToBus(busPayload)));
+                            obs.next(this.mapPayloadToDetailBus(response));
                         } else {
                             obs.error('No response when get hours list');
                         }
@@ -114,6 +112,19 @@ export class TanService extends ParentServices {
             busPayload.temps,
             busPayload.tempsReel,
             busPayload.terminus
+        );
+    }
+
+    private mapPayloadToDetailBus(busDetailsPayload: BusDetailsPayload): Bus {
+        return new Bus(
+            busDetailsPayload.arret.codeArret,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null,
+            null
         );
     }
 }

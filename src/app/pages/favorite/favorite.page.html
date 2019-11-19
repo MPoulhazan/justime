@@ -1,3 +1,11 @@
-<ion-content>
-    Page 2
+<ion-content class="home-container">
+    <ion-grid>
+        <ion-row class="ion-align-items-center">
+            <ion-col size="12">
+                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop" [busCard]="itBusCard"></app-card-bus>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <ion-label *ngIf="noBookmarks">Oups, vous n'avez pas encore de favoris !</ion-label>
 </ion-content>

@@ -11,6 +11,7 @@ import { startWith, map } from 'rxjs/operators';
 import { BusCard } from 'src/app/models/bus.model';
 import { BookmarkService } from 'src/app/services/bookmark.service';
 import { Bookmark } from 'src/app/models/bookmark.model';
+import { AbstractPage } from '../abstractPage.page';
 
 const LOGGER = new Logger('HomePage');
 
@@ -19,12 +20,11 @@ const LOGGER = new Logger('HomePage');
     templateUrl: './home.page.html',
     styleUrls: ['./home.page.scss'],
 })
-export class HomePage implements OnInit {
+export class HomePage extends AbstractPage {
 
     public stops: Stop[] = [];
     public stopsFiltered: Stop[] = [];
     public stopsFormGroup: FormGroup;
-    public finalBusCardAtStop: BusCard[] = [];
     public bookmarks: Bookmark[];
 
     constructor(
@@ -33,7 +33,9 @@ export class HomePage implements OnInit {
         private bookmarkService: BookmarkService,
         public navController: NavController,
         private formBuilder: FormBuilder
-    ) { }
+    ) {
+        super();
+     }
 
     ngOnInit() {
 
@@ -55,6 +57,7 @@ export class HomePage implements OnInit {
     }
 
     submitStops() {
+
         this.initDatas();
         const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
 
@@ -77,10 +80,6 @@ export class HomePage implements OnInit {
                 }
             });
         });
-    }
-
-    initDatas() {
-        this.finalBusCardAtStop = [];
     }
 
     getAllBookmarks() {

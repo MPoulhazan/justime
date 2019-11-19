@@ -2,7 +2,7 @@
     <ion-card-header class="line-container">
         <ion-card-title>{{busCard.bus.numLigne}}</ion-card-title>
         <ion-card-subtitle>{{busCard.bus.terminus}}</ion-card-subtitle>
-        <i class="material-icons add-favorite" [ngClass]="isBookmarked ? 'green' : ''" (click)="addToFavorites(busCard.bus.numLigne, busCard.bus.arret)">star</i>
+        <i class="material-icons add-favorite" [ngClass]="isBookmarked ? 'green' : ''" (click)="addToFavorites(busCard.bus.numLigne, busCard.bus.arret, busCard.bus.sens)">star</i>
     </ion-card-header>
     <ion-card-content>
         <span *ngIf="busCard.nextHours && busCard.nextHours.length > 0" class="next-hour">
