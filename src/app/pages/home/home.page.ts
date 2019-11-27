@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, interval } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Logger } from '../../services/logger.service';
@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
 import { TanService } from 'src/app/services/tan.service';
 import { Stop } from 'src/app/models/stop.model';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { startWith, map } from 'rxjs/operators';
+import { startWith, map, finalize, retry, take, repeatWhen } from 'rxjs/operators';
 import { BusCard } from 'src/app/models/bus.model';
 import { BookmarkService } from 'src/app/services/bookmark.service';
 import { Bookmark } from 'src/app/models/bookmark.model';
@@ -26,6 +26,7 @@ export class HomePage extends AbstractPage {
     public stopsFiltered: Stop[] = [];
     public stopsFormGroup: FormGroup;
     public bookmarks: Bookmark[];
+    public isLoadingStops = true;
 
     constructor(
         private router: Router,
@@ -37,6 +38,7 @@ export class HomePage extends AbstractPage {
         super();
      }
 
+    // tslint:disable-next-line: use-life-cycle-interface
     ngOnInit() {
 
         // Init Form
@@ -44,9 +46,15 @@ export class HomePage extends AbstractPage {
             stop: ['', Validators.required]
         });
 
-        this.tanService.getTanStops().subscribe(res => {
+        this.tanService.getTanStops().pipe(
+            take(1),
+            finalize(() => this.isLoadingStops = false),
+            retry(2)
+        ).subscribe(res => {
             this.stops = res;
             this.stopsFiltered = res;
+        }, err => {
+            LOGGER.error('Unable to call tan API : ', err);
         });
 
         this.getAllBookmarks();
@@ -57,12 +65,17 @@ export class HomePage extends AbstractPage {
     }
 
     submitStops() {
+        const source = interval(5000);
 
         this.initDatas();
         const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
 
         // Get each bus for this stop
-        this.tanService.getHoursAtStop(codeLieu).subscribe(allBusAtStop => {
+        this.tanService.getHoursAtStop(codeLieu)
+        // .pipe(
+        //     repeatWhen(TODO)
+        // )
+        .subscribe(allBusAtStop => {
 
             allBusAtStop.forEach(bus => {
                 const busCardAtStop = this.finalBusCardAtStop.find((busCard: BusCard) => {

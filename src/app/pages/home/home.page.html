@@ -1,10 +1,16 @@
 <ion-content class="home-container">
-    <!-- Loading template -->
+
+    <!-- Loading stops -->
+    <ion-backdrop *ngIf="isLoadingStops" class="backdrop"></ion-backdrop>
+    <ion-spinner *ngIf="isLoadingStops" name="crescent" class="backdrop-spinner" color="light"></ion-spinner>
+
+    <!-- Loading cards -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
+
 
     <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm" class="form-container">
         <mat-form-field>
-            <input type="text" formControlName="stop" placeholder="Quelle arrêt ?" aria-label="Number" matInput
+            <input type="text" formControlName="stop" placeholder="Quel arrêt ?" aria-label="Number" matInput
                 [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  (optionSelected)='submitStops()'>
                 <mat-option *ngFor="let option of stopsFiltered" [value]="option.libelle">
