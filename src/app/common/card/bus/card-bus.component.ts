@@ -13,6 +13,9 @@ export class CardBusComponent implements OnInit {
     @Input()
     busCard: BusCard;
 
+    @Input()
+    idx: BusCard;
+
     isBookmarked: boolean;
 
     constructor(

@@ -9,6 +9,12 @@ ion-content {
 
 .home-container {
 
+    .title {
+        color: #ffffff;
+        text-align: center;
+        font-family: 'righteous', arial;
+    }
+
     .backdrop {
         opacity: 0.4;
         z-index: 10;
@@ -26,6 +32,7 @@ ion-content {
 
         display: inline-flex;
         width: 100%;
+        position: relative;
 
         > * {
             flex: auto;
@@ -35,6 +42,13 @@ ion-content {
         .nobg-button {
             --background: transparent !important;
             --background-activated: #ffffff30 !important;
+        }
+
+        .clear-icon {
+            position: absolute;
+            color: #ffffff;
+            right: 5px;
+            top: 15px;
         }
     }
 

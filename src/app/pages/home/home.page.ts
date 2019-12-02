@@ -27,13 +27,15 @@ export class HomePage extends AbstractPage {
     public stopsFormGroup: FormGroup;
     public bookmarks: Bookmark[];
     public isLoadingStops = true;
+    public isCleared = true;
 
     constructor(
         private router: Router,
         private tanService: TanService,
         private bookmarkService: BookmarkService,
         public navController: NavController,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private dataService: DataService
     ) {
         super();
      }
@@ -42,13 +44,14 @@ export class HomePage extends AbstractPage {
     ngOnInit() {
 
         // Init Form
-        this.stopsFormGroup = this.formBuilder.group({
-            stop: ['', Validators.required]
-        });
+        this.initForm();
 
         this.tanService.getTanStops().pipe(
             take(1),
-            finalize(() => this.isLoadingStops = false),
+            finalize(() => {
+                this.isLoadingStops = false;
+                this.dataService.setAppLoaded('App readys');
+            }),
             retry(2)
         ).subscribe(res => {
             this.stops = res;
@@ -60,12 +63,19 @@ export class HomePage extends AbstractPage {
         this.getAllBookmarks();
     }
 
+    initForm() {
+        this.stopsFormGroup = this.formBuilder.group({
+            stop: ['', Validators.required]
+        });
+    }
+
     onInputChange(value) {
         this.stopsFiltered = this.stops.filter(stop => stop.libelle.toLocaleLowerCase().indexOf(value.toLocaleLowerCase()) >= 0);
     }
 
     submitStops() {
         const source = interval(5000);
+        this.isCleared = true;
 
         this.initDatas();
         const codeLieu = this.stops.find(stop => stop.libelle === this.stopsFormGroup.value.stop).codeLieu;
@@ -98,5 +108,10 @@ export class HomePage extends AbstractPage {
     getAllBookmarks() {
         // Call service at start to initialize bookmark list
         this.bookmarkService.getBookmarksInStorage();
+    }
+
+    clearInput(): void {
+        this.stopsFormGroup.reset({stop: ''});
+        this.isCleared = false;
     }
 }

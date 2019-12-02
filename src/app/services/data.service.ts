@@ -7,12 +7,12 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable()
 export class DataService {
 
-    private changeClientSource = new BehaviorSubject('');
-    currentMessage = this.changeClientSource.asObservable();
+    private appLoaded = new BehaviorSubject('');
+    currentMessage = this.appLoaded.asObservable();
 
     constructor() { }
 
-    changeClient(message: string) {
-        this.changeClientSource.next(message);
+    setAppLoaded(message: string) {
+        this.appLoaded.next(message);
     }
 }

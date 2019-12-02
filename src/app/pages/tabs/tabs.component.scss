@@ -1,5 +1,9 @@
 ion-tabs {
 
+    ion-tab-bar {
+        --background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 63%, rgba(13,13,158,1) 100%);
+    }
+
     .tabs-icons {
         font-size: 35px;
     
@@ -15,7 +19,8 @@ ion-tabs {
     
     .tab-selected {
         .tabs-icons {
-            border-top: #3780ff solid 2px;
+            color: #ffffff;
+            border-top: #ffffff solid 2px;
             padding: 10px;
         }
     }

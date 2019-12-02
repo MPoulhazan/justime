@@ -7,8 +7,10 @@
     <!-- Loading cards -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
 
+    <h1 *ngIf="!isLoadingStops" class="title animated fadeInDown">Justime Nantes</h1>
 
-    <form [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm" class="form-container">
+    <form *ngIf="!isLoadingStops" [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm" 
+    class="form-container animated fadeIn delay-1s">
         <mat-form-field>
             <input type="text" formControlName="stop" placeholder="Quel arrêt ?" aria-label="Number" matInput
                 [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
@@ -18,12 +20,13 @@
                 </mat-option>
             </mat-autocomplete>
         </mat-form-field>
+        <i class="material-icons clear-icon" (click)="clearInput()">highlight_off</i>
     </form>
 
-    <ion-grid>
+    <ion-grid [ngClass]="isCleared ? '' : 'animated bounceOutDown'" >
         <ion-row class="ion-align-items-center">
             <ion-col size="12">
-                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop" [busCard]="itBusCard"></app-card-bus>
+                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop ; let idx = index" [busCard]="itBusCard" [idx]="idx"></app-card-bus>
             </ion-col>
         </ion-row>
     </ion-grid>
