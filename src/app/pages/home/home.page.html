@@ -2,7 +2,9 @@
 
     <!-- Loading stops -->
     <ion-backdrop *ngIf="isLoadingStops" class="backdrop"></ion-backdrop>
-    <ion-spinner *ngIf="isLoadingStops" name="crescent" class="backdrop-spinner" color="light"></ion-spinner>
+    <div *ngIf="isLoadingStops" class="preload-content">
+        <h1 class="title animated fadeIn delay-1s">Justime Nantes</h1>
+    </div>
 
     <!-- Loading cards -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
