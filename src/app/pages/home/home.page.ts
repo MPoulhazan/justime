@@ -114,4 +114,8 @@ export class HomePage extends AbstractPage {
         this.stopsFormGroup.reset({stop: ''});
         this.isCleared = false;
     }
+
+    refreshData() {
+        console.log('REFRED');
+    }
 }

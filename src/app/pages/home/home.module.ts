@@ -12,6 +12,7 @@ import { MaterialModule } from 'src/app/shared/material.module';
 import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { CardBusModule } from 'src/app/common/card/bus/card-bus.module';
+import { RefresherModule } from 'src/app/common/refresher/refresher.module';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { CardBusModule } from 'src/app/common/card/bus/card-bus.module';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
+    RefresherModule
   ]
 })
 

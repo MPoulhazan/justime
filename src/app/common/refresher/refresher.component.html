@@ -1,3 +1,4 @@
-<p>
-  refresher works!
-</p>
+<ion-refresher class="ion-refresher" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="refresh" refreshingSpinner="crescent">
+    </ion-refresher-content>
+</ion-refresher>

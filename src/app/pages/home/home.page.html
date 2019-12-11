@@ -1,9 +1,16 @@
 <ion-content class="home-container">
 
+    <!-- Refresher (TODO) -->
+    <!-- <app-refresher (refresh)="refreshData()"></app-refresher> -->
+
     <!-- Loading stops -->
     <ion-backdrop *ngIf="isLoadingStops" class="backdrop"></ion-backdrop>
     <div *ngIf="isLoadingStops" class="preload-content">
+        <ion-progress-bar type="indeterminate" class="title animated fadeInLeft delay-2s" color="light">
+        </ion-progress-bar>
         <h1 class="title animated fadeIn delay-1s">Justime Nantes</h1>
+        <ion-progress-bar type="indeterminate" class="title animated fadeInLeft delay-2s" color="light">
+        </ion-progress-bar>
     </div>
 
     <!-- Loading cards -->
@@ -11,12 +18,12 @@
 
     <h1 *ngIf="!isLoadingStops" class="title animated fadeInDown">Justime Nantes</h1>
 
-    <form *ngIf="!isLoadingStops" [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm" 
-    class="form-container animated fadeIn delay-1s">
+    <form *ngIf="!isLoadingStops" [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm"
+        class="form-container animated fadeIn delay-1s">
         <mat-form-field>
             <input type="text" formControlName="stop" placeholder="Quel arrêt ?" aria-label="Number" matInput
                 [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
-            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"  (optionSelected)='submitStops()'>
+            <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='submitStops()'>
                 <mat-option *ngFor="let option of stopsFiltered" [value]="option.libelle">
                     {{option.libelle}}
                 </mat-option>
@@ -25,10 +32,11 @@
         <i class="material-icons clear-icon" (click)="clearInput()">highlight_off</i>
     </form>
 
-    <ion-grid [ngClass]="isCleared ? '' : 'animated bounceOutDown'" >
+    <ion-grid [ngClass]="isCleared ? '' : 'animated bounceOutDown'">
         <ion-row class="ion-align-items-center">
             <ion-col size="12">
-                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop ; let idx = index" [busCard]="itBusCard" [idx]="idx"></app-card-bus>
+                <app-card-bus *ngFor="let itBusCard of finalBusCardAtStop ; let idx = index" [busCard]="itBusCard"
+                    [idx]="idx"></app-card-bus>
             </ion-col>
         </ion-row>
     </ion-grid>

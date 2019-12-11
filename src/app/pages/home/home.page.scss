@@ -25,6 +25,7 @@ ion-content {
         margin-top: 250px;
         width: 100%;
         height: 50px;
+        position: absolute;
 
         > h1 {
             width: 100%;
@@ -73,5 +74,16 @@ ion-content {
     ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-label,
     ::ng-deep .mat-input-element {
         color: #ffffff;
+    }
+
+}
+::ng-deep .mat-autocomplete-panel {
+    background-color: #00000099;
+    max-height: 450px !important;
+
+    .mat-option {
+        color: #ffffff;
+        text-align: center;
+        border-bottom: 1px solid #ffffff40;
     }
 }
