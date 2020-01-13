@@ -1,5 +1,19 @@
 
 ion-content {
-    --background: rgb(2,0,36);
-    --background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 63%, rgba(13,13,158,1) 100%);
+    // --background: rgb(2,0,36);
+    // --background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 63%, rgba(13,13,158,1) 100%);
+    --background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ),
+    url("../../../assets/image/nantes3.jpg");
+    --background-size: cover 100%;
+
+    .no-bookmark-lbl {
+        color: #ffffff;
+        text-align: center;
+        margin: auto;
+        width: 100%;
+    }
 }

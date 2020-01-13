@@ -1,10 +1,16 @@
 
 ion-content {
 
-    --background: rgb(2,0,36);
-    --background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 63%, rgba(13,13,158,1) 100%);
-    // --background: url("../../../assets/image/bgbus.jpeg") no-repeat center fixed;
-    // --background-size: cover 100%;
+    // --background: rgb(2,0,36);
+    // --background: linear-gradient(180deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 63%, rgba(13,13,158,1) 100%);
+    // --background: url("../../../assets/image/nantes3.jpg") no-repeat center fixed;
+    --background:
+    linear-gradient(
+      rgba(0, 0, 0, 0.7), 
+      rgba(0, 0, 0, 0.7)
+    ),
+    url("../../../assets/image/nantes.jpg");
+    --background-size: cover 100%;
 }
 
 .home-container {
@@ -54,6 +60,13 @@ ion-content {
             position: absolute;
             color: #ffffff;
             right: 5px;
+            top: 15px;
+        }
+
+        .refresh-icon {
+            position: absolute;
+            color: #ffffff;
+            right: 35px;
             top: 15px;
         }
     }

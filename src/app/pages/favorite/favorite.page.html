@@ -1,4 +1,8 @@
 <ion-content class="home-container">
+
+    <!-- Refresher -->
+    <app-refresher (refresh)="getBookmarkHours()"></app-refresher>
+
     <ion-grid>
         <ion-row class="ion-align-items-center">
             <ion-col size="12">
@@ -7,5 +11,7 @@
         </ion-row>
     </ion-grid>
 
-    <ion-label *ngIf="noBookmarks">Oups, vous n'avez pas encore de favoris !</ion-label>
+    <div class="no-bookmark-lbl">
+        <ion-label *ngIf="noBookmarks">Oups, vous n'avez pas encore de favoris !</ion-label>
+    </div>
 </ion-content>

@@ -13,6 +13,8 @@ import { MatAutocompleteModule, MatInputModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { CardBusModule } from 'src/app/common/card/bus/card-bus.module';
 import { RefresherModule } from 'src/app/common/refresher/refresher.module';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import { RefresherModule } from 'src/app/common/refresher/refresher.module';
     ReactiveFormsModule,
     MatInputModule,
     RefresherModule
-  ]
+  ],
+  providers: [Keyboard]
 })
 
 export class HomeModule { }

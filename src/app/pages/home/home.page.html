@@ -1,7 +1,7 @@
 <ion-content class="home-container">
 
-    <!-- Refresher (TODO) -->
-    <!-- <app-refresher (refresh)="refreshData()"></app-refresher> -->
+    <!-- Refresher -->
+    <app-refresher (refresh)="refreshData()"></app-refresher>
 
     <!-- Loading stops -->
     <ion-backdrop *ngIf="isLoadingStops" class="backdrop"></ion-backdrop>
@@ -16,12 +16,14 @@
     <!-- Loading cards -->
     <app-loading *ngIf="false" [isCard]="true" [numberOfRows]="2"></app-loading>
 
+    <!-- <ion-icon name="refresh" class="tabs-icons animated fadeInUp delay-1s" (click)="submitStops()"></ion-icon> -->
+
     <h1 *ngIf="!isLoadingStops" class="title animated fadeInDown">Justime Nantes</h1>
 
     <form *ngIf="!isLoadingStops" [formGroup]="stopsFormGroup" (ngSubmit)="submitStops()" #formtwo="ngForm"
         class="form-container animated fadeIn delay-1s">
         <mat-form-field>
-            <input type="text" formControlName="stop" placeholder="Quel arrêt ?" aria-label="Number" matInput
+            <input #searchInput type="text" formControlName="stop" placeholder="Quel arrêt ?" aria-label="Number" matInput
                 [matAutocomplete]="auto" (input)="onInputChange($event.target.value)">
             <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" (optionSelected)='submitStops()'>
                 <mat-option *ngFor="let option of stopsFiltered" [value]="option.libelle">
@@ -30,6 +32,7 @@
             </mat-autocomplete>
         </mat-form-field>
         <i class="material-icons clear-icon" (click)="clearInput()">highlight_off</i>
+        <i class="material-icons refresh-icon" (click)="submitStops()">refresh</i>
     </form>
 
     <ion-grid [ngClass]="isCleared ? '' : 'animated bounceOutDown'">

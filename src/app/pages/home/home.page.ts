@@ -12,6 +12,8 @@ import { BusCard } from 'src/app/models/bus.model';
 import { BookmarkService } from 'src/app/services/bookmark.service';
 import { Bookmark } from 'src/app/models/bookmark.model';
 import { AbstractPage } from '../abstractPage.page';
+import { Keyboard } from '@ionic-native/keyboard/ngx';
+import { ViewChild } from '@angular/core'
 
 const LOGGER = new Logger('HomePage');
 
@@ -28,6 +30,7 @@ export class HomePage extends AbstractPage {
     public bookmarks: Bookmark[];
     public isLoadingStops = true;
     public isCleared = true;
+    @ViewChild('searchInput') searchInput;
 
     constructor(
         private router: Router,
@@ -35,10 +38,11 @@ export class HomePage extends AbstractPage {
         private bookmarkService: BookmarkService,
         public navController: NavController,
         private formBuilder: FormBuilder,
-        private dataService: DataService
+        private dataService: DataService,
+        private keyboard: Keyboard
     ) {
         super();
-     }
+    }
 
     // tslint:disable-next-line: use-life-cycle-interface
     ngOnInit() {
@@ -74,6 +78,8 @@ export class HomePage extends AbstractPage {
     }
 
     submitStops() {
+        this.closeKeyboard();
+
         const source = interval(5000);
         this.isCleared = true;
 
@@ -82,27 +88,27 @@ export class HomePage extends AbstractPage {
 
         // Get each bus for this stop
         this.tanService.getHoursAtStop(codeLieu)
-        // .pipe(
-        //     repeatWhen(TODO)
-        // )
-        .subscribe(allBusAtStop => {
+            // .pipe(
+            //     repeatWhen(TODO)
+            // )
+            .subscribe(allBusAtStop => {
 
-            allBusAtStop.forEach(bus => {
-                const busCardAtStop = this.finalBusCardAtStop.find((busCard: BusCard) => {
-                    return busCard.bus.numLigne === bus.numLigne && busCard.bus.sens === bus.sens;
+                allBusAtStop.forEach(bus => {
+                    const busCardAtStop = this.finalBusCardAtStop.find((busCard: BusCard) => {
+                        return busCard.bus.numLigne === bus.numLigne && busCard.bus.sens === bus.sens;
+                    });
+                    if (!busCardAtStop) {
+                        this.finalBusCardAtStop.push(new BusCard(bus, [bus.temps]));
+                    } else {
+                        if (!busCardAtStop.nextHours) {
+                            busCardAtStop.nextHours = [];
+                        }
+                        if (busCardAtStop.nextHours) {
+                            busCardAtStop.nextHours.push(bus.temps);
+                        }
+                    }
                 });
-                if (!busCardAtStop) {
-                    this.finalBusCardAtStop.push(new BusCard(bus, [bus.temps]));
-                } else {
-                    if (!busCardAtStop.nextHours) {
-                        busCardAtStop.nextHours = [];
-                    }
-                    if (busCardAtStop.nextHours) {
-                        busCardAtStop.nextHours.push(bus.temps);
-                    }
-                }
             });
-        });
     }
 
     getAllBookmarks() {
@@ -111,11 +117,16 @@ export class HomePage extends AbstractPage {
     }
 
     clearInput(): void {
-        this.stopsFormGroup.reset({stop: ''});
+        this.stopsFormGroup.reset({ stop: '' });
         this.isCleared = false;
     }
 
     refreshData() {
-        console.log('REFRED');
+        this.submitStops();
+    }
+
+    private closeKeyboard() {
+        this.searchInput.nativeElement.blur();
+        this.keyboard.hide();
     }
 }
